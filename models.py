@@ -35,3 +35,23 @@ class Dealer(SQLBaseModel):
     name: str = Field(max_length=64, nullable=False)
     address: str = Field(max_length=128, nullable=False, default="")
 
+
+class Property(SQLModel, table=True):
+    id: Annotated[int, SkipJsonSchema()] = Field(primary_key=True)
+    # basic info
+    name: str = Field(max_length=64, nullable=False)
+    description: str = Field(max_length=128, nullable=False)
+    # type
+    property_type_1: Annotated[PropertyTypeBase, SkipJsonSchema()] = Field(default=PropertyTypeBase.RESIDENTIAL)
+    property_type_2: Annotated[PropertyTypeExtended, SkipJsonSchema()] = Field(default=PropertyTypeExtended.RESIDENTIAL_LAND)
+
+    # location
+    area: str = Field(max_length=64, nullable=False)
+    city: str = Field(unique=True, max_length=64, nullable=False)
+
+    # features
+    price_in_inr: int = Field(nullable=False)
+    area_in_sqrft: int = Field(nullable=False)
+    no_of_room: int = Field(nullable=False)
+    no_of_bath: int = Field(nullable=False)
+
