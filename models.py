@@ -18,3 +18,8 @@ class Villa(BaseSQLModel):
     no_of_bathrooms: int
     has_pool: bool = False
     description: Optional[str] = None
+
+class FarmHouse(BaseSQLModel):
+    property_id: int = Field(nullable=False, foreign_key="property.id")
+    description: Optional[str] = None
+    has_electricity: bool = True
