@@ -11,6 +11,11 @@ class BaseSQLModel(SQLModel, table=True):
     id: Annotated[int, SkipJsonSchema()] = Field(primary_key=True)
     created_at: Annotated[datetime.datetime, SkipJsonSchema()] = Field(default=datetime.datetime.now())
 
+class Dealer(BaseSQLModel):
+    user_id: int = Field(default=None, foreign_key="user.id")
+    dealer_pic: str = Field(max_length=256, nullable=False, default="")
+    address: str = Field(max_length=128, nullable=False, default="")
+
 class Villa(BaseSQLModel):
     property_id: int = Field(nullable=False, foreign_key="property.id")
     price_per_night: float
@@ -22,4 +27,3 @@ class Villa(BaseSQLModel):
 class FarmHouse(BaseSQLModel):
     property_id: int = Field(nullable=False, foreign_key="property.id")
     description: Optional[str] = None
-    has_electricity: bool = True
