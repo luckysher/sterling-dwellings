@@ -16,6 +16,11 @@ class Dealer(BaseSQLModel):
     dealer_pic: str = Field(max_length=256, nullable=False, default="")
     address: str = Field(max_length=128, nullable=False, default="")
 
+class Builder(BaseSQLModel):
+    user_id: int = Field(default=None, foreign_key="user.id")
+    dealer_pic: str = Field(max_length=256, nullable=False, default="")
+    address: str = Field(max_length=128, nullable=False, default="")
+
 class Villa(BaseSQLModel):
     property_id: int = Field(nullable=False, foreign_key="property.id")
     price_per_night: float
